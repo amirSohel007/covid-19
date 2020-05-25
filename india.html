@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="./app.css">
+    <title>Corona World cases</title>
+</head>
+<body>
+
+
+<header>
+    <div class="container">
+        <nav class="navbar navbar-expand-md ">
+            <span class="navbar-brand text-white"> <img style="width: 30px; margin-right: 5px; vertical-align: text-bottom;" src="https://akashraj.tech/corona/asset/virus.png"> COVID-19</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link text-white" href="index.html">World Cases <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="india.html">India Cases</a>
+                </li>
+              </ul>
+              <form class="form-inline mt-2 mt-md-0 d-none d-lg-block d-sm-block">
+                <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" aria-label="Search">
+              </form>
+            </div>
+          </nav>
+    </div>
+</header>
+
+<div class="mobile-search">
+    <form class="form-inline mt-2 mt-md-0 d-block d-lg-none d-sm-none">
+      <input class="form-control mr-sm-2" id="mobile" type="text" placeholder="Search" aria-label="Search">
+    </form>
+  </div>
+
+<div class="main-body">
+    <div class="loader">
+      <div class="corona-loading">
+        <img src="https://akashraj.tech/corona/asset/virus.png" alt="">
+        <p>Loading result ...</p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row" id="card"></div>
+   </div>
+  
+  </div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132223767-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-132223767-1');
+</script>
+
+ <script>
+let card = document.getElementById('card');
+let search = document.getElementById('search');
+let mobile = document.getElementById('mobile')
+ async function indiaData() {
+    let res = await fetch('https://akashraj.tech/corona/api_india');
+    let data = await res.json();
+    document.querySelector('.loader').style.display = "none"
+    let result = data['state_wise']
+    Object.keys(result).forEach((key, index) => {
+        card.innerHTML += ` 
+        <div class="col-sm-4">
+   <div class="card" >
+      <div class="card-body">
+         <h4 id="title" class="card-title">${key}</h4>
+         <div>
+            <ul>
+               <li>
+                <p style="color:#3498DB">Active : <span class="d-block">${result[key].active}</span></p>
+               </li>
+               <li>
+                  <p>Confirmed : <span class="d-block">${result[key].confirmed}</span></p>
+               </li>
+               <li>
+                <p style="color:#E74C3C">Deaths <span class="d-block">${result[key].deaths}</span></p>
+               </li>
+               <li>
+                <p style="color:#00bc8c">Recoverd: <span class="d-block">${result[key].recovered}</span></p>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>
+       `});
+ 
+        search.addEventListener('input', () => {
+          let title = document.getElementsByClassName('card-title')
+          for (let val of title) {
+            if (val.innerText.toLowerCase().includes(search.value.toLowerCase())) {
+              val.parentElement.parentNode.parentNode.setAttribute('style', 'display:block');
+            }
+            else {
+              val.parentNode.parentNode.parentNode.setAttribute('style', 'display:none');
+            }
+          }
+        });
+
+        mobile.addEventListener('input', ()=> {
+        let title = document.getElementsByClassName('card-title');
+          for (let val of title) {
+            if (val.innerText.toLowerCase().includes(mobile.value.toLowerCase())) {
+              val.parentElement.parentNode.parentNode.setAttribute('style', 'display:block');
+            }
+            else {
+              val.parentNode.parentNode.parentNode.setAttribute('style', 'display:none');
+            }
+          }
+        })
+}
+indiaData();
+
+
+ </script>
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

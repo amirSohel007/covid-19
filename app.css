@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=swap');
+body { background: #e6e6e6; font-family: 'Nunito', sans-serif;}
+.card {
+margin-bottom: 15px;
+border-radius: 0;
+border: none;
+    border-radius: 5px;
+}
+
+.card-body ul {
+padding: 0;
+list-style: none;
+margin: 0;
+display: flex;
+flex-wrap: wrap;
+}
+
+.card-body ul li {
+width: 33%;
+}
+
+.card-body ul li p span {
+color: #444;
+font-size: 12px;
+}
+.card-body ul li p {
+font-size: 13px;
+color: #000000;
+}
+
+header {
+background: #1a2b3a;
+margin-bottom: 30px;
+position: sticky;
+top: 0;
+z-index: 999;
+}
+
+input {
+border-radius: 0 !important;
+height: 36px;
+border: none !important;
+font-size: 14px !important;
+}
+
+.navbar-toggler:focus{
+outline: none;
+}
+
+button.navbar-toggler {
+    background: url('https://www.mangoapps.com/website/images/icons/menu_hamburger.png') no-repeat;
+    background-size: 43px;
+    position: relative;
+    top: -2px;
+}
+
+.loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 58px;
+    background: #fff;
+    z-index: 999999999;
+    bottom: 0;
+    display: flex;
+}
+
+.corona-loading {
+    margin: auto;
+}
+
+.corona-loading img {
+    width: 90px;
+    margin-bottom: 10px;
+}
+
+.mobile-search input {
+    background: #ffffff;
+    color: #192b3a !important;
+    border-radius: 2px !important;
+    border: solid 1px #eaeaea !important;
+}
+
+.mobile-search input:focus {
+    outline: none;
+    box-shadow: 0 0 0;
+}
+
+.mobile-search {
+    max-width: 90%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+@media (max-width:767px){
+    .d-xs {display: block}
+}
+
+.card-body img {
+    width: 40px;
+    position: absolute;
+    right: 30px;
+    top: 10px;
+}
